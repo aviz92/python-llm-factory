@@ -22,22 +22,20 @@ class LLMFactory:
         self.client = self._initialize_client()
 
     def _initialize_client(self) -> Any:
-        client_initializers = {
-            "openai": lambda s: instructor.from_openai(OpenAI(api_key=s.api_key)) if s.api_key else None,
-            "anthropic": lambda s: instructor.from_anthropic(Anthropic(api_key=s.api_key)) if s.api_key else None,
-            "gemini": lambda s: instructor.from_openai(
-                OpenAI(base_url=s.base_url, api_key=s.api_key),
+        if self.provider == LLMProvider.OPENAI:
+            return instructor.from_openai(OpenAI(api_key=self.settings.api_key))
+        if self.provider == LLMProvider.ANTHROPIC:
+            return instructor.from_anthropic(Anthropic(api_key=self.settings.api_key))
+        if self.provider == LLMProvider.GEMINI:
+            return instructor.from_openai(
+                OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
                 mode=instructor.Mode.JSON,
-            ) if s.api_key else None,
-            "llama": lambda s: instructor.from_openai(
-                OpenAI(base_url=s.base_url, api_key=s.api_key),
+            )
+        if self.provider == LLMProvider.LLAMA:
+            return instructor.from_openai(
+                OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
                 mode=instructor.Mode.JSON,
-            ) if s.api_key else None,
-        }
-
-        initializer = client_initializers.get(self.provider)
-        if initializer:
-            return initializer(self.settings)
+            )
         raise ValueError(f"Unsupported LLM provider: {self.provider}")
 
     def create_completion(
