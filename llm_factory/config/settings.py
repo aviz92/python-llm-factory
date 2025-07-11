@@ -14,18 +14,18 @@ class LLMProviderSettings(BaseSettings):
 
 
 class OpenAISettings(LLMProviderSettings):
-    api_key: str = os.getenv("OPENAI_API_KEY")
+    api_key: str = os.getenv("OPENAI_API_KEY") or ""
     default_model: str = "gpt-4o"
 
 
 class AnthropicSettings(LLMProviderSettings):
-    api_key: str = os.getenv("ANTHROPIC_API_KEY")
+    api_key: str = os.getenv("ANTHROPIC_API_KEY") or ""
     default_model: str = "claude-3-5-sonnet-20240620"
     max_tokens: int = 1024
 
 
 class GeminiSettings(LLMProviderSettings):
-    api_key: str = os.getenv("GEMINI_API_KEY")
+    api_key: str = os.getenv("GEMINI_API_KEY") or ""
     default_model: str = "gemini-1.5-flash"
     # default_model: str = "gemini-2.5-flash"
     max_tokens: int = 1024
@@ -40,10 +40,10 @@ class LlamaSettings(LLMProviderSettings):
 
 class Settings(BaseSettings):
     app_name: str = "GenAI Project Template"
-    # openai: OpenAISettings = OpenAISettings()
-    # anthropic: AnthropicSettings = AnthropicSettings()
+    openai: OpenAISettings = OpenAISettings()
+    anthropic: AnthropicSettings = AnthropicSettings()
     gemini: GeminiSettings = GeminiSettings()
-    # llama: LlamaSettings = LlamaSettings()
+    llama: LlamaSettings = LlamaSettings()
 
 
 @lru_cache

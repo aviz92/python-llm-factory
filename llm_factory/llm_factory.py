@@ -23,16 +23,16 @@ class LLMFactory:
 
     def _initialize_client(self) -> Any:
         client_initializers = {
-            "openai": lambda s: instructor.from_openai(OpenAI(api_key=s.api_key)),
-            "anthropic": lambda s: instructor.from_anthropic(Anthropic(api_key=s.api_key)),
+            "openai": lambda s: instructor.from_openai(OpenAI(api_key=s.api_key)) if s.api_key else None,
+            "anthropic": lambda s: instructor.from_anthropic(Anthropic(api_key=s.api_key)) if s.api_key else None,
             "gemini": lambda s: instructor.from_openai(
                 OpenAI(base_url=s.base_url, api_key=s.api_key),
                 mode=instructor.Mode.JSON,
-            ),
+            ) if s.api_key else None,
             "llama": lambda s: instructor.from_openai(
                 OpenAI(base_url=s.base_url, api_key=s.api_key),
                 mode=instructor.Mode.JSON,
-            ),
+            ) if s.api_key else None,
         }
 
         initializer = client_initializers.get(self.provider)
