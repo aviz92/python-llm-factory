@@ -15,7 +15,7 @@ A flexible Python factory for working with multiple Large Language Model (LLM) p
 
 ## Installation
 ```bash
-pip install -r requirements.txt
+pip install python-llm-factory
 ```
 
 ---
