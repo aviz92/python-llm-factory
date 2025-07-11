@@ -29,6 +29,7 @@ class GeminiSettings(LLMProviderSettings):
     default_model: str = "gemini-1.5-flash"
     # default_model: str = "gemini-2.5-flash"
     max_tokens: int = 1024
+    base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
 
 
 class LlamaSettings(LLMProviderSettings):
