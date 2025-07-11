@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_version = "1.0.13"
+package_version = "0.0.1"
 
 package_name = "llm_factory"
 package_description = "A flexible Python factory for working with multiple Large Language Model (LLM) providers (OpenAI, Anthropic, Gemini, Llama) using a unified interface, with robust configuration and extensibility."
