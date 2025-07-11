@@ -18,8 +18,7 @@ if __name__ == "__main__":
         },
     ]
 
-    # llm = LLMFactory(provider=LLMProvider.GEMINI)
-    llm = LLMFactory(provider="gemini")
+    llm = LLMFactory(provider=LLMProvider.GEMINI)
     completion = llm.create_completion(
         response_model=CompletionModel,
         messages=messages,

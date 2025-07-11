@@ -1,11 +1,11 @@
-from enum import Enum, StrEnum
+from enum import StrEnum
 from typing import Any, Dict, List, Type
 
 import instructor
 from anthropic import Anthropic
 from llm_factory.config.settings import get_settings
 from openai import OpenAI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class LLMProvider(StrEnum):
@@ -16,7 +16,7 @@ class LLMProvider(StrEnum):
 
 
 class LLMFactory:
-    def __init__(self, provider: str):
+    def __init__(self, provider: LLMProvider):
         self.provider = provider
         self.settings = getattr(get_settings(), provider)
         self.client = self._initialize_client()
