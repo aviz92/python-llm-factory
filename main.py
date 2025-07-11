@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from llm_factory.llm_factory import LLMProvider, LLMFactory
+from python_llm_factory.llm_factory import LLMProvider, LLMFactory
 
 if __name__ == "__main__":
     class CompletionModel(BaseModel):

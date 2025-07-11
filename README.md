@@ -35,17 +35,21 @@ GEMINI_API_KEY=your_gemini_api_key
 ## Examples
 
 ### Basic Usage: Creating a Completion
+
 ```python
 from pydantic import BaseModel, Field
-from llm_factory.llm_factory import LLMProvider, LLMFactory
+from python_llm_factory.llm_factory import LLMProvider, LLMFactory
+
 
 class CompletionModel(BaseModel):
     response: str = Field(description="Your response to the user.")
     reasoning: str = Field(description="Explain your reasoning for the response.")
 
+
 messages = [
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "If it takes 2 hours to dry 1 shirt out in the sun, how long will it take to dry 5 shirts?"},
+    {"role": "user",
+     "content": "If it takes 2 hours to dry 1 shirt out in the sun, how long will it take to dry 5 shirts?"},
 ]
 
 llm = LLMFactory(provider=LLMProvider.GEMINI)

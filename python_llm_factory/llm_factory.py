@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Type
 
 import instructor
 from anthropic import Anthropic
-from llm_factory.config.settings import get_settings
+from python_llm_factory.config.settings import get_settings
 from openai import OpenAI
 from pydantic import BaseModel
 
