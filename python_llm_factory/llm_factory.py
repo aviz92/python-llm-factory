@@ -39,7 +39,12 @@ class LLMFactory:
         raise ValueError(f"Unsupported LLM provider: {self.provider}")
 
     def create_completion(
-        self, response_model: Type[BaseModel], messages: List[Dict[str, str]], **kwargs
+        self,
+        messages: List[Dict[str, str]],
+        response_model: Type[BaseModel] = None,
+        function_descriptions: List[Dict[str, Any]] = None,
+        function_call: str = None,
+        **kwargs
     ) -> Any:
         completion_params = {
             "model": kwargs.get("model", self.settings.default_model),
@@ -49,4 +54,10 @@ class LLMFactory:
             "response_model": response_model,
             "messages": messages,
         }
+
+        if function_descriptions:
+            completion_params["function_descriptions"] = function_descriptions
+        if function_call:
+            completion_params["function_call"] = function_call
+
         return self.client.chat.completions.create(**completion_params)
