@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import Any, Dict, List, Type
+from typing import Any, Dict, List, Type, Optional
 
 import instructor
 from anthropic import Anthropic
@@ -41,16 +41,19 @@ class LLMFactory:
     def create_completion(
         self,
         messages: List[Dict[str, str]],
-        response_model: Type[BaseModel] = None,
-        functions: List[Dict[str, Any]] = None,
-        function_call: str = None,
-        **kwargs
+        model: str = Optional[None],
+        temperature: float = Optional[None],
+        max_retries: int = Optional[None],
+        max_tokens: int = Optional[None],
+        response_model: Type[BaseModel] = Optional[None],
+        functions: List[Dict[str, Any]] = Optional[None],
+        function_call: str = Optional[None],
     ) -> Any:
         completion_params = {
-            "model": kwargs.get("model", self.settings.default_model),
-            "temperature": kwargs.get("temperature", self.settings.temperature),
-            "max_retries": kwargs.get("max_retries", self.settings.max_retries),
-            "max_tokens": kwargs.get("max_tokens", self.settings.max_tokens),
+            "model": model or self.settings.default_model,
+            "temperature": temperature or self.settings.default_temperature,
+            "max_retries": max_retries or self.settings.default_max_retries,
+            "max_tokens": max_tokens or self.settings.default_max_tokens,
             "response_model": response_model,
             "messages": messages,
         }
