@@ -42,7 +42,7 @@ class LLMFactory:
         self,
         messages: List[Dict[str, str]],
         response_model: Type[BaseModel] = None,
-        function_descriptions: List[Dict[str, Any]] = None,
+        functions: List[Dict[str, Any]] = None,
         function_call: str = None,
         **kwargs
     ) -> Any:
@@ -55,9 +55,10 @@ class LLMFactory:
             "messages": messages,
         }
 
-        if function_descriptions:
-            completion_params["function_descriptions"] = function_descriptions
-        if function_call:
-            completion_params["function_call"] = function_call
+        if self.provider == LLMProvider.OPENAI:
+            if functions:
+                completion_params["functions"] = functions
+            if function_call:
+                completion_params["function_call"] = function_call
 
         return self.client.chat.completions.create(**completion_params)
