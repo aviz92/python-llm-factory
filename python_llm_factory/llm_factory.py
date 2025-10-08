@@ -40,12 +40,12 @@ class LLMFactory:
 
     def create_completion(
         self,
+        response_model: Optional[Type[BaseModel]],
         messages: List[Dict[str, str]],
         model: Optional[str] = None,
         temperature: Optional[float] = None,
         max_retries: Optional[int] = None,
         max_tokens: Optional[int] = None,
-        response_model: Optional[Type[BaseModel]] = None,
         functions: Optional[List[Dict[str, Any]]] = None,
         function_call: Optional[str] = None,
     ) -> Any:
