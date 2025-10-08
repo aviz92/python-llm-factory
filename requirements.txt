@@ -13,6 +13,7 @@ custom-python-logger
 pytest-plugins
 
 instructor
-anthropic
+langchain
 openai
+anthropic
 google-genai
