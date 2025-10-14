@@ -1,6 +1,7 @@
 setuptools
-dotenv
 wheel
+python-dotenv
+pre-commit
 colorlog
 pytest
 pathlib

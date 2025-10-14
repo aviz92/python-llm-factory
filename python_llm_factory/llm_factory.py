@@ -1,53 +1,46 @@
-from enum import StrEnum
-from typing import Any, Dict, List, Type, Optional
+from typing import Any
 
 import instructor
 from anthropic import Anthropic
-from python_llm_factory.config.settings import get_settings
 from openai import OpenAI
 from pydantic import BaseModel
 
-
-class LLMProvider(StrEnum):
-    OPENAI = "openai"
-    ANTHROPIC = "anthropic"
-    GEMINI = "gemini"
-    LLAMA = "llama"
+from python_llm_factory.config.settings import Settings
+from python_llm_factory.consts.provider import LLMProvider
 
 
 class LLMFactory:
-    def __init__(self, provider: LLMProvider):
-        self.provider = provider
-        self.settings = getattr(get_settings(), provider)
+    def __init__(self, settings: Settings) -> None:
+        self.settings = settings
         self.client = self._initialize_client()
 
     def _initialize_client(self) -> Any:
-        if self.provider == LLMProvider.OPENAI:
+        if self.settings.provider == LLMProvider.OPENAI:
             return instructor.from_openai(OpenAI(api_key=self.settings.api_key))
-        if self.provider == LLMProvider.ANTHROPIC:
+        if self.settings.provider == LLMProvider.ANTHROPIC:
             return instructor.from_anthropic(Anthropic(api_key=self.settings.api_key))
-        if self.provider == LLMProvider.GEMINI:
+        if self.settings.provider == LLMProvider.GEMINI:
             return instructor.from_openai(
                 OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
                 mode=instructor.Mode.JSON,
             )
-        if self.provider == LLMProvider.LLAMA:
+        if self.settings.provider == LLMProvider.LLAMA:
             return instructor.from_openai(
                 OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
                 mode=instructor.Mode.JSON,
             )
-        raise ValueError(f"Unsupported LLM provider: {self.provider}")
+        raise ValueError(f"Unsupported LLM provider: {self.settings.provider}")
 
     def create_completion(
         self,
-        response_model: Optional[Type[BaseModel]],
-        messages: List[Dict[str, str]],
-        model: Optional[str] = None,
-        temperature: Optional[float] = None,
-        max_retries: Optional[int] = None,
-        max_tokens: Optional[int] = None,
-        functions: Optional[List[Dict[str, Any]]] = None,
-        function_call: Optional[str] = None,
+        response_model: type[BaseModel] | None,
+        messages: list[dict[str, str]],
+        model: str | None = None,
+        temperature: float | None = None,
+        max_retries: int | None = None,
+        max_tokens: int | None = None,
+        functions: list[dict[str, Any]] | None = None,
+        function_call: str | None = None,
     ) -> Any:
         completion_params = {
             "model": model or self.settings.default_model,
@@ -58,7 +51,7 @@ class LLMFactory:
             "messages": messages,
         }
 
-        if self.provider == LLMProvider.OPENAI:
+        if self.settings.provider == LLMProvider.OPENAI:
             if functions:
                 completion_params["functions"] = functions
             if function_call:
