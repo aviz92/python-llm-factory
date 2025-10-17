@@ -1,3 +1,5 @@
+import logging
+import os
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings
@@ -19,3 +21,16 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+def set_logging_level(level: int = logging.INFO) -> None:
+    logging.getLogger("instructor").setLevel(level=level)
+
+
+def set_debug_mode() -> None:
+    # https://python.useinstructor.com/debugging/#example-local-debug-run
+    os.environ["LLM_LOGGING_LEVEL"] = "1"
+
+
+def stop_debug_mode() -> None:
+    os.environ["LLM_LOGGING_LEVEL"] = "0"

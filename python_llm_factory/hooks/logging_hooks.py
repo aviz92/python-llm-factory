@@ -11,15 +11,15 @@ def log_kwargs(**kwargs) -> None:
     logger.debug(f"Function called with kwargs: {json_pretty_format(kwargs)}")
 
 
-def log_completion_response(response) -> None:
-    logger.debug(f"Completion response: {json_pretty_format(response)}")
+def log_completion_response(messages) -> None:
+    logger.debug(f"Completion response: {json_pretty_format(messages)}")
 
 
 def add_logging_hooks(client: LLMFactory, handler: Callable) -> None:
     client.client.on(HookName.COMPLETION_KWARGS, handler)
-    logger.info(f"Completion logging hook registered for {client.client.name}")
+    logger.info("Completion logging hook registered")
 
 
 def stop_logging_hooks(client, handler):
     client.client.off(HookName.COMPLETION_KWARGS, handler)
-    logger.info(f"Completion logging hook stopped for {client.client.name}")
+    logger.info("Completion logging hook stopped")

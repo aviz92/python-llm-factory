@@ -1,8 +1,10 @@
+from custom_python_logger import build_logger
 from pydantic import BaseModel
 
 from examples.instructor_examples.create_gemini_client import create_default_client
+from python_llm_factory.config.settings import set_logging_level
 from python_llm_factory.hooks.error_hooks import add_error_hooks
-from python_llm_factory.hooks.logging_hooks import add_logging_hooks
+from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs, log_completion_response
 
 
 class UserInfo(BaseModel):
@@ -11,10 +13,12 @@ class UserInfo(BaseModel):
 
 
 if __name__ == '__main__':
-    client = create_default_client()
+    logger = build_logger(__name__)
 
-    add_logging_hooks(client=client)
-    add_error_hooks(client=client)
+    client = create_default_client()
+    set_logging_level()
+
+    add_logging_hooks(client=client, handler=log_kwargs)
 
     user_info = client.completions_create(
         response_model=UserInfo,
