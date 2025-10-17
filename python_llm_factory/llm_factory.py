@@ -5,12 +5,13 @@ from anthropic import Anthropic
 from openai import OpenAI
 from pydantic import BaseModel
 
+from python_llm_factory.config.base_settings import LLMProviderSettings
 from python_llm_factory.config.settings import Settings
 from python_llm_factory.consts.provider import LLMProvider
 
 
 class LLMFactory:
-    def __init__(self, settings: Settings) -> None:
+    def __init__(self, settings: LLMProviderSettings) -> None:
         self.settings = settings
         self.client = self._initialize_client()
 
