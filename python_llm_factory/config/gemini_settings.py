@@ -11,7 +11,7 @@ class GeminiBaseSettings(LLMProviderSettings):
     api_key: str = os.getenv("GEMINI_API_KEY") or ""
     default_model: str = "gemini-1.5-flash"
     # default_model: str = "gemini-2.5-flash"
-    max_tokens: int = 1024
+    max_tokens: int = 4096
     base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
 
 

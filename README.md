@@ -53,7 +53,7 @@ messages = [
 ]
 
 llm = LLMFactory(provider=LLMProvider.GEMINI)
-completion = llm.create_completion(
+completion = llm.completions_create(
     response_model=CompletionModel,
     messages=messages,
 )

@@ -54,7 +54,7 @@ class Ticket(BaseModel):
 
 
 def process_ticket(customer_message: str) -> Ticket:
-    reply = llm.create_completion(
+    reply = llm.completions_create(
         # response_model=Ticket,
         response_model=ValidationTicket,
         max_retries=3,

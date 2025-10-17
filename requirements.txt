@@ -9,12 +9,12 @@ PyYAML
 pydantic
 pydantic-settings
 
-# Aviz92 Public packages
-custom-python-logger
-pytest-plugins
-
 instructor
 langchain
 openai
 anthropic
 google-genai
+
+# Aviz92 Public packages
+custom-python-logger
+pytest-plugins

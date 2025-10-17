@@ -20,7 +20,7 @@ if __name__ == "__main__":
     llm = LLMFactory(
         settings=Settings().gemini.gemini_2_5_flash,
     )
-    completion = llm.create_completion(
+    completion = llm.completions_create(
         response_model=CompletionModel,
         messages=messages,
     )

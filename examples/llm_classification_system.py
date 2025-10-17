@@ -107,7 +107,7 @@ class TicketClassification(BaseModel):
 
 
 def classify_ticket(ticket_text: str) -> TicketClassification:
-    response = llm.create_completion(
+    response = llm.completions_create(
         response_model=TicketClassification,
         temperature=0,
         max_retries=3,
@@ -122,6 +122,7 @@ def classify_ticket(ticket_text: str) -> TicketClassification:
     return response
 
 
-for ticket in (ticket1, ticket2):
-    result = classify_ticket(ticket)
-    print(result.model_dump_json(indent=2))
+if __name__ == '__main__':
+    for ticket in (ticket1, ticket2):
+        result = classify_ticket(ticket)
+        print(result.model_dump_json(indent=2))

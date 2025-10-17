@@ -6,7 +6,6 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 from python_llm_factory.config.base_settings import LLMProviderSettings
-from python_llm_factory.config.settings import Settings
 from python_llm_factory.consts.provider import LLMProvider
 
 
@@ -32,7 +31,7 @@ class LLMFactory:
             )
         raise ValueError(f"Unsupported LLM provider: {self.settings.provider}")
 
-    def create_completion(
+    def completions_create(
         self,
         response_model: type[BaseModel] | None,
         messages: list[dict[str, str]],
