@@ -7,6 +7,7 @@ from python_llm_factory import LLMFactory
 
 logger = get_logger(__name__)
 
+
 def log_kwargs(**kwargs) -> None:
     logger.debug(f"Function called with kwargs: {json_pretty_format(kwargs)}")
 
