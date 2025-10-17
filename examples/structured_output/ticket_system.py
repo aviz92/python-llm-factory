@@ -39,7 +39,7 @@ class ValidationTicket(BaseModel):
             llm_validator(
                 statement="Never say things that could hurt the reputation of the company. ",
                 client=llm.client,
-                model="gemini-1.5-flash",
+                model="gemini-2.5-flash",
                 allow_override=True,
             )
         ),

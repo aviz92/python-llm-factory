@@ -37,7 +37,6 @@ if __name__ == '__main__':
                         'content': "Extract the user name: 'John is 20 years old'",
                     }
                 ],
-                'model': 'gpt-3.5-turbo',
                 'tools': [
                     {
                         'type': 'function',
