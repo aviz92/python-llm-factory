@@ -79,6 +79,12 @@ if __name__ == '__main__':
         ],
     )
 
-    print(f"Customer: {support_case.customer_name}")
+
+    print(f'"Support case for {support_case.customer_name} ({support_case.customer_contact.email}, {support_case.customer_contact.phone}).')
+    print(f'Address: {support_case.customer_address.street}, {support_case.customer_address.city}, {support_case.customer_address.postal_code}."')
+    for ticket in support_case.tickets:
+        print(f'- Ticket "{ticket.title}" with priority {ticket.priority} requiring {ticket.estimated_hours} hours.')
+    print(f'Total estimated time: {support_case.total_estimated_time} hours.')
+
     print(f"Total tickets: {len(support_case.tickets)}")
     print(f"Critical tickets: {len([t for t in support_case.tickets if t.priority == Priority.CRITICAL])}")
