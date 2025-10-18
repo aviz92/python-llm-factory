@@ -23,5 +23,7 @@ if __name__ == '__main__':
         response_format=Weather,
         tools=function_descriptions,
         tool_choice={"type": "function", "function": {"name": "get_weather"}},
+        response_list=response_list
     )
     print(res.choices[0].message.parsed.model_dump_json(indent=2))
+    print()

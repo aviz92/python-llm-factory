@@ -91,8 +91,9 @@ class LLMFactory:
         max_tokens: int | None = None,
         tools: list | None = None,
         tool_choice: list | None = None,
+        response_list: list | None = None,
     ) -> Any:
-        self.completions_create(
+        res = self.completions_create(
             messages=messages,
             model=model,
             temperature=temperature,
@@ -101,10 +102,17 @@ class LLMFactory:
             tools=tools,
             tool_choice=tool_choice,
         )
-        return self.completions_parse(
+        if response_list is not None:
+            response_list.append(res)
+
+        res = self.completions_parse(
             response_format=response_format,
             model=model,
             temperature=temperature,
             messages=messages,
             max_tokens=max_tokens,
         )
+        if response_list is not None:
+            response_list.append(res)
+
+        return res
