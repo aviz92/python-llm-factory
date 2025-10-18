@@ -1,6 +1,7 @@
 from enum import Enum
 
 from pydantic import BaseModel, Field, field_validator
+from pydantic_core.core_schema import FieldValidationInfo
 
 from examples.instructor_examples.create_gemini_client import create_default_client
 
@@ -50,7 +51,7 @@ class CustomerSupport(BaseModel):
 
     @field_validator("total_estimated_time")
     @classmethod
-    def validate_total_time(cls, v: float, info) -> float:
+    def validate_total_time(cls, v: float, info: FieldValidationInfo) -> float:  #
         if "tickets" in info.data:
             ticket_time = sum(t.estimated_hours or 0 for t in info.data["tickets"])
             if abs(v - ticket_time) > 0.1:  # Allow small floating point differences
