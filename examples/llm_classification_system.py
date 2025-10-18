@@ -112,10 +112,7 @@ def classify_ticket(ticket_text: str) -> TicketClassification:
         temperature=0,
         max_retries=3,
         messages=[
-            {
-                "role": "system",
-                "content": SYSTEM_PROMPT,
-            },
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": ticket_text},
         ],
     )
