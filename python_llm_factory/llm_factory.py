@@ -16,13 +16,20 @@ class LLMFactory:
 
     def _initialize_client(self) -> Any:
         if self.settings.provider == LLMProvider.OPENAI:
-            return instructor.from_openai(OpenAI(api_key=self.settings.api_key))
+            return instructor.from_openai(
+                OpenAI(api_key=self.settings.api_key)
+            )
         if self.settings.provider == LLMProvider.ANTHROPIC:
-            return instructor.from_anthropic(Anthropic(api_key=self.settings.api_key))
+            return instructor.from_anthropic(
+                Anthropic(api_key=self.settings.api_key)
+            )
         if self.settings.provider == LLMProvider.GEMINI:
             return instructor.from_openai(
-                OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
-                mode=instructor.Mode.TOOLS,
+                OpenAI(
+                    base_url=self.settings.base_url,
+                    api_key=self.settings.api_key
+                ),
+                mode=instructor.Mode.JSON,
             )
         if self.settings.provider == LLMProvider.LLAMA:
             return instructor.from_openai(
