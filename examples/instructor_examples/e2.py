@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field, field_validator
 from pydantic_core.core_schema import FieldValidationInfo
 
 from examples.instructor_examples.create_gemini_client import create_default_client
+from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs
 
 
 class Priority(str, Enum):
@@ -61,6 +62,7 @@ class CustomerSupport(BaseModel):
 
 if __name__ == "__main__":
     client = create_default_client()
+    add_logging_hooks(client=client, handler=log_kwargs)
 
     support_case = client.completions_create(
         response_model=CustomerSupport,
@@ -68,7 +70,12 @@ if __name__ == "__main__":
         max_retries=3,
         max_tokens=2048,
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "system",
+                "content": "You are a helpful assistant."
+                "Always return a single structured CustomerSupport object, "
+                "even if multiple tickets are included. Do not create separate tool calls.",
+            },
             {
                 "role": "user",
                 "content": """
