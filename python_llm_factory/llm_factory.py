@@ -55,9 +55,11 @@ class LLMFactory:
             "max_tokens": max_tokens or self.settings.max_tokens,
             "response_model": response_model,
             "messages": messages,
-            "tools": tools,
-            "tool_choice": tool_choice,
         }
+        if tools:
+            completion_params["tools"] = tools
+        if tool_choice:
+            completion_params["tool_choice"] = tool_choice
         return self.client.chat.completions.create(**completion_params)
 
     def completions_parse(
