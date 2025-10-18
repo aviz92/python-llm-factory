@@ -2,7 +2,7 @@ from enum import Enum
 
 from pydantic import BaseModel, Field
 
-from python_llm_factory import LLMFactory
+from python_llm_factory.llm_factory import LLMFactory
 from python_llm_factory.config.settings import Settings
 
 llm = LLMFactory(

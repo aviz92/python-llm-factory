@@ -38,7 +38,8 @@ GEMINI_API_KEY=your_gemini_api_key
 
 ```python
 from pydantic import BaseModel, Field
-from python_llm_factory.llm_factory import LLMProvider, LLMFactory
+from python_llm_factory import LLMFactory
+from python_llm_factory import Settings
 
 
 class CompletionModel(BaseModel):
@@ -48,11 +49,12 @@ class CompletionModel(BaseModel):
 
 messages = [
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user",
-     "content": "If it takes 2 hours to dry 1 shirt out in the sun, how long will it take to dry 5 shirts?"},
+    {"role": "user", "content": "If it takes 2 hours to dry 1 shirt out in the sun, how long will it take to dry 5 shirts?"},
 ]
 
-llm = LLMFactory(provider=LLMProvider.GEMINI)
+llm = LLMFactory(
+    settings=Settings().gemini.gemini_2_5_flash,
+)
 completion = llm.completions_create(
     response_model=CompletionModel,
     messages=messages,
