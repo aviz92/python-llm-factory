@@ -1,4 +1,4 @@
-def get_weather(city: str):
+def get_weather(city: str) -> dict:
     temperature_c = 25.0  # Dummy temperature value
     return {
         "city": city,

@@ -3,8 +3,7 @@ from pydantic import BaseModel
 
 from examples.instructor_examples.create_gemini_client import create_default_client
 from python_llm_factory.config.settings import set_logging_level
-from python_llm_factory.hooks.error_hooks import add_error_hooks
-from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs, log_completion_response
+from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs
 
 
 class UserInfo(BaseModel):
@@ -12,7 +11,7 @@ class UserInfo(BaseModel):
     age: int
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logger = build_logger(__name__)
 
     client = create_default_client()
@@ -22,9 +21,7 @@ if __name__ == '__main__':
 
     user_info = client.completions_create(
         response_model=UserInfo,
-        messages=[
-            {"role": "user", "content": "Extract the user name: 'John is 20 years old'"}
-        ],
+        messages=[{"role": "user", "content": "Extract the user name: 'John is 20 years old'"}],
     )
 
     """
@@ -42,7 +39,8 @@ if __name__ == '__main__':
                         'type': 'function',
                         'function': {
                             'name': 'UserInfo',
-                            'description': 'Correctly extracted `UserInfo` with all the required parameters with correct types',
+                            'description': 'Correctly extracted `UserInfo` with all the required parameters with
+                            correct types',
                             'parameters': {
                                 'properties': {
                                     'name': {'title': 'Name', 'type': 'string'},
@@ -59,4 +57,4 @@ if __name__ == '__main__':
         }
     """
 
-    print(f"Name: {user_info.name}, Age: {user_info.age}")  #> Name: John, Age: 20
+    print(f"Name: {user_info.name}, Age: {user_info.age}")  # > Name: John, Age: 20

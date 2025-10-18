@@ -10,20 +10,20 @@ class Weather(BaseModel):
     unit: str
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     client = create_default_client()
 
     response_list = []
     messages = [
         {"role": "system", "content": "You are a helpful weather assistant."},
-        {"role": "user", "content": "What's the weather in Tel Aviv?"}
+        {"role": "user", "content": "What's the weather in Tel Aviv?"},
     ]
     res = client.completions_tools(
         messages=messages,
         response_format=Weather,
         tools=function_descriptions,
         tool_choice={"type": "function", "function": {"name": "get_weather"}},
-        response_list=response_list
+        response_list=response_list,
     )
     print(res.choices[0].message.parsed.model_dump_json(indent=2))
     print()

@@ -2,8 +2,8 @@ from enum import Enum
 
 from pydantic import BaseModel, Field
 
-from python_llm_factory.llm_factory import LLMFactory
 from python_llm_factory.config.settings import Settings
+from python_llm_factory.llm_factory import LLMFactory
 
 llm = LLMFactory(
     settings=Settings().gemini.gemini_2_5_flash,
@@ -119,7 +119,7 @@ def classify_ticket(ticket_text: str) -> TicketClassification:
     return response
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for ticket in (ticket1, ticket2):
         result = classify_ticket(ticket)
         print(result.model_dump_json(indent=2))
