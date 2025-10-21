@@ -16,17 +16,33 @@ class LLMFactory:
 
     def _initialize_client(self) -> Any:
         if self.settings.provider == LLMProvider.OPENAI:
-            return instructor.from_openai(OpenAI(api_key=self.settings.api_key))
+            return instructor.from_openai(
+                OpenAI(
+                    api_key=self.settings.api_key,
+                    base_url=self.settings.base_url
+                )
+            )
         if self.settings.provider == LLMProvider.ANTHROPIC:
-            return instructor.from_anthropic(Anthropic(api_key=self.settings.api_key))
+            return instructor.from_anthropic(
+                Anthropic(
+                    api_key=self.settings.api_key,
+                    base_url=self.settings.base_url
+                )
+            )
         if self.settings.provider == LLMProvider.GEMINI:
             return instructor.from_openai(
-                OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
+                OpenAI(
+                    api_key=self.settings.api_key,
+                    base_url=self.settings.base_url
+                ),
                 mode=instructor.Mode.JSON,
             )
         if self.settings.provider == LLMProvider.LLAMA:
             return instructor.from_openai(
-                OpenAI(base_url=self.settings.base_url, api_key=self.settings.api_key),
+                OpenAI(
+                    api_key=self.settings.api_key,
+                    base_url=self.settings.base_url
+                ),
                 mode=instructor.Mode.JSON,
             )
         raise ValueError(f"Unsupported LLM provider: {self.settings.provider}")
@@ -34,7 +50,7 @@ class LLMFactory:
     def completions_create(
         self,
         messages: list[dict[str, str]],
-        response_model: type[BaseModel] | None = None,
+        response_model: type[list[BaseModel]] | None = None,
         model: str | None = None,
         temperature: float | None = None,
         max_retries: int | None = None,
