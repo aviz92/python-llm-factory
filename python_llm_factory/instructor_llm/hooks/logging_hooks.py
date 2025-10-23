@@ -4,7 +4,7 @@ from typing import Any
 from custom_python_logger import get_logger, json_pretty_format
 from instructor.core import HookName
 
-from python_llm_factory import LLMFactory
+from python_llm_factory.instructor_llm.instructor_factory import LLMFactory
 
 logger = get_logger(__name__)
 

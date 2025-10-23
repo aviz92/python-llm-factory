@@ -1,48 +1,36 @@
 from typing import Any
 
 import instructor
-from anthropic import Anthropic
-from openai import OpenAI
 from pydantic import BaseModel
 
 from python_llm_factory.config.base_settings import LLMProviderSettings
 from python_llm_factory.consts.provider import LLMProvider
+from python_llm_factory.llm_provider_factory import LLMProviderFactory
 
 
 class LLMFactory:
     def __init__(self, settings: LLMProviderSettings) -> None:
         self.settings = settings
+        self.llm_provider_factory = LLMProviderFactory()
         self.client = self._initialize_client()
 
     def _initialize_client(self) -> Any:
         if self.settings.provider == LLMProvider.OPENAI:
             return instructor.from_openai(
-                OpenAI(
-                    api_key=self.settings.api_key,
-                    base_url=self.settings.base_url
-                )
+                self.llm_provider_factory.initialize_client(settings=self.settings)
             )
         if self.settings.provider == LLMProvider.ANTHROPIC:
             return instructor.from_anthropic(
-                Anthropic(
-                    api_key=self.settings.api_key,
-                    base_url=self.settings.base_url
-                )
+                self.llm_provider_factory.initialize_client(settings=self.settings)
             )
         if self.settings.provider == LLMProvider.GEMINI:
             return instructor.from_openai(
-                OpenAI(
-                    api_key=self.settings.api_key,
-                    base_url=self.settings.base_url
-                ),
+                self.llm_provider_factory.initialize_client(settings=self.settings),
                 mode=instructor.Mode.JSON,
             )
         if self.settings.provider == LLMProvider.LLAMA:
             return instructor.from_openai(
-                OpenAI(
-                    api_key=self.settings.api_key,
-                    base_url=self.settings.base_url
-                ),
+                self.llm_provider_factory.initialize_client(settings=self.settings),
                 mode=instructor.Mode.JSON,
             )
         raise ValueError(f"Unsupported LLM provider: {self.settings.provider}")
@@ -50,7 +38,7 @@ class LLMFactory:
     def completions_create(
         self,
         messages: list[dict[str, str]],
-        response_model: type[list[BaseModel]] | None = None,
+        response_model: type[list[BaseModel]] | type[BaseModel] | None = None,
         model: str | None = None,
         temperature: float | None = None,
         max_retries: int | None = None,
@@ -80,7 +68,7 @@ class LLMFactory:
 
     def completions_parse(
         self,
-        response_format: type[BaseModel] | None,
+        response_format: type[list[BaseModel]] | type[BaseModel] | None,
         model: str | None = None,
         temperature: float | None = None,
         messages: list[dict[str, str]] | None = None,
@@ -102,13 +90,13 @@ class LLMFactory:
     def completions_tools(
         self,
         messages: list[dict[str, str]],
-        response_format: type[BaseModel] | None = None,
+        response_format: type[list[BaseModel]] | type[BaseModel] | None = None,
         model: str | None = None,
         temperature: float | None = None,
         max_retries: int | None = None,
         max_tokens: int | None = None,
         tools: list | None = None,
-        tool_choice: list | None = None,
+        tool_choice: list | dict | None = None,
         response_list: list | None = None,
     ) -> Any:
         res = self.completions_create(

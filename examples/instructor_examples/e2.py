@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, field_validator
 from pydantic_core.core_schema import FieldValidationInfo
 
 from examples.instructor_examples.create_gemini_client import create_default_client
-from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs
+from python_llm_factory.instructor_llm.hooks.logging_hooks import add_logging_hooks, log_kwargs
 
 
 class Priority(str, Enum):

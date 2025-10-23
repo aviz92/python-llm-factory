@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 from examples.instructor_examples.create_gemini_client import create_default_client
 from python_llm_factory.config.settings import set_logging_level
-from python_llm_factory.hooks.logging_hooks import add_logging_hooks, log_kwargs
+from python_llm_factory.instructor_llm.hooks.logging_hooks import add_logging_hooks, log_kwargs
 
 
 class UserInfo(BaseModel):
