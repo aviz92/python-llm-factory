@@ -1,7 +1,7 @@
 from enum import StrEnum
 
 
-class LLMProvider(StrEnum):
+class LlmProvider(StrEnum):
     OPENAI = "openai"
     ANTHROPIC = "anthropic"
     GEMINI = "gemini"

@@ -3,32 +3,32 @@ from typing import Any
 import instructor
 from pydantic import BaseModel
 
-from python_llm_factory.config.base_settings import LLMProviderSettings
-from python_llm_factory.consts.provider import LLMProvider
-from python_llm_factory.llm_provider_factory import LLMProviderFactory
+from python_llm_factory.config.base_settings import LlmProviderSettings
+from python_llm_factory.consts.provider import LlmProvider
+from python_llm_factory.llm_provider_factory import LlmProviderFactory
 
 
 class LlmInstructorFactory:
-    def __init__(self, settings: LLMProviderSettings) -> None:
+    def __init__(self, settings: LlmProviderSettings) -> None:
         self.settings = settings
-        self.llm_provider_factory = LLMProviderFactory()
+        self.llm_provider_factory = LlmProviderFactory()
         self.client = self._initialize_client()
 
     def _initialize_client(self) -> Any:
-        if self.settings.provider == LLMProvider.OPENAI:
+        if self.settings.provider == LlmProvider.OPENAI:
             return instructor.from_openai(
                 self.llm_provider_factory.initialize_client(settings=self.settings)
             )
-        if self.settings.provider == LLMProvider.ANTHROPIC:
+        if self.settings.provider == LlmProvider.ANTHROPIC:
             return instructor.from_anthropic(
                 self.llm_provider_factory.initialize_client(settings=self.settings)
             )
-        if self.settings.provider == LLMProvider.GEMINI:
+        if self.settings.provider == LlmProvider.GEMINI:
             return instructor.from_openai(
                 self.llm_provider_factory.initialize_client(settings=self.settings),
                 mode=instructor.Mode.JSON,
             )
-        if self.settings.provider == LLMProvider.LLAMA:
+        if self.settings.provider == LlmProvider.LLAMA:
             return instructor.from_openai(
                 self.llm_provider_factory.initialize_client(settings=self.settings),
                 mode=instructor.Mode.JSON,

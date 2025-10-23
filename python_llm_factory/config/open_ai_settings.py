@@ -2,12 +2,12 @@ import os
 
 from pydantic_settings import BaseSettings
 
-from python_llm_factory.config.base_settings import LLMProviderSettings
-from python_llm_factory.consts.provider import LLMProvider
+from python_llm_factory.config.base_settings import LlmProviderSettings
+from python_llm_factory.consts.provider import LlmProvider
 
 
-class OpenAIBaseSettings(LLMProviderSettings):
-    provider: str = LLMProvider.OPENAI.value
+class OpenAIBaseSettings(LlmProviderSettings):
+    provider: str = LlmProvider.OPENAI.value
     api_key: str = os.getenv("OPENAI_API_KEY") or ""
     default_model: str = "gpt-4o"
 
@@ -18,4 +18,4 @@ class Gpt4oSettings(OpenAIBaseSettings):
 
 
 class OpenAISettings(BaseSettings):
-    gpt_4o: LLMProviderSettings = Gpt4oSettings()
+    gpt_4o: LlmProviderSettings = Gpt4oSettings()

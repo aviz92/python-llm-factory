@@ -2,12 +2,12 @@ import os
 
 from pydantic_settings import BaseSettings
 
-from python_llm_factory.config.base_settings import LLMProviderSettings
-from python_llm_factory.consts.provider import LLMProvider
+from python_llm_factory.config.base_settings import LlmProviderSettings
+from python_llm_factory.consts.provider import LlmProvider
 
 
-class GeminiBaseSettings(LLMProviderSettings):
-    provider: str = LLMProvider.GEMINI.value
+class GeminiBaseSettings(LlmProviderSettings):
+    provider: str = LlmProvider.GEMINI.value
     api_key: str = os.getenv("GEMINI_API_KEY") or ""
     default_model: str = "gemini-1.5-flash"
     # default_model: str = "gemini-2.5-flash"
@@ -25,5 +25,5 @@ class Gemini25FlashSettings(GeminiBaseSettings):
 
 
 class GeminiSettings(BaseSettings):
-    gemini_1_5_flash: LLMProviderSettings = Gemini15FlashSettings()
-    gemini_2_5_flash: LLMProviderSettings = Gemini25FlashSettings()
+    gemini_1_5_flash: LlmProviderSettings = Gemini15FlashSettings()
+    gemini_2_5_flash: LlmProviderSettings = Gemini25FlashSettings()

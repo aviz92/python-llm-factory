@@ -1,11 +1,11 @@
 from pydantic_settings import BaseSettings
 
-from python_llm_factory.config.base_settings import LLMProviderSettings
-from python_llm_factory.consts.provider import LLMProvider
+from python_llm_factory.config.base_settings import LlmProviderSettings
+from python_llm_factory.consts.provider import LlmProvider
 
 
-class LlamaBaseSettings(LLMProviderSettings):
-    provider: str = LLMProvider.LLAMA.value
+class LlamaBaseSettings(LlmProviderSettings):
+    provider: str = LlmProvider.LLAMA.value
     api_key: str = "key"  # required, but not used
     default_model: str = "llama3"
     base_url: str = "http://localhost:11434/v1"
@@ -16,4 +16,4 @@ class Llama3Settings(LlamaBaseSettings):
 
 
 class LlamaSettings(BaseSettings):
-    llama3: LLMProviderSettings = Llama3Settings()
+    llama3: LlmProviderSettings = Llama3Settings()

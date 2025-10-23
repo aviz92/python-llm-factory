@@ -1,10 +1,10 @@
 from pydantic_settings import BaseSettings
 
-from python_llm_factory.consts.provider import LLMProvider
+from python_llm_factory.consts.provider import LlmProvider
 
 
-class LLMProviderSettings(BaseSettings):
-    provider: LLMProvider | None = None
+class LlmProviderSettings(BaseSettings):
+    provider: LlmProvider | None = None
     base_url: str | None = None
     api_key: str | None = None
     default_model: str | None = None
