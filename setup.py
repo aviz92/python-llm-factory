@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_version = "0.0.5"
+package_version = "0.0.6"
 
 package_name = "python-llm-factory"
 package_description = (
