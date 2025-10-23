@@ -5,9 +5,9 @@ from instructor import llm_validator
 from pydantic import BaseModel, BeforeValidator, Field
 
 from python_llm_factory.config.settings import Settings
-from python_llm_factory.instructor_llm.instructor_factory import LLMFactory
+from python_llm_factory.instructor_llm.instructor_factory import LlmInstructorFactory
 
-llm = LLMFactory(
+llm = LlmInstructorFactory(
     settings=Settings().gemini.gemini_2_5_flash,
 )
 

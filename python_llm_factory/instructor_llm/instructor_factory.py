@@ -8,7 +8,7 @@ from python_llm_factory.consts.provider import LLMProvider
 from python_llm_factory.llm_provider_factory import LLMProviderFactory
 
 
-class LLMFactory:
+class LlmInstructorFactory:
     def __init__(self, settings: LLMProviderSettings) -> None:
         self.settings = settings
         self.llm_provider_factory = LLMProviderFactory()
