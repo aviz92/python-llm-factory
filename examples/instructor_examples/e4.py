@@ -2,7 +2,7 @@ from custom_python_logger import build_logger
 from pydantic import BaseModel
 
 from examples.instructor_examples.create_gemini_client import create_default_client
-from python_llm_factory.config.settings import set_logging_level
+from python_llm_factory.config.settings_ins import set_logging_level
 from python_llm_factory.instructor_llm.hooks.logging_hooks import add_logging_hooks, log_kwargs
 
 

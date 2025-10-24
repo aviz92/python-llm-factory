@@ -8,8 +8,8 @@ from python_llm_factory.consts.provider import LlmProvider
 
 class AnthropicBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.ANTHROPIC.value
-    api_key: str = os.getenv("ANTHROPIC_API_KEY") or ""
-    default_model: str = "claude-3-5-sonnet-20240620"
+    # base_url: str | None = None
+    api_key: str = os.getenv("ANTHROPIC_API_KEY") or None
     max_tokens: int = 1024
 
 

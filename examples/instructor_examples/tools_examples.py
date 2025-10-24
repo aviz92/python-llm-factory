@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 from examples.instructor_examples.create_gemini_client import create_default_client
-from examples.tools.weather import function_descriptions
+from examples.instructor_examples.tools.weather import function_descriptions
 
 
 class Weather(BaseModel):

@@ -1,5 +1,3 @@
-import logging
-import os
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings
@@ -10,8 +8,10 @@ from python_llm_factory.config.llama_settings import LlamaSettings
 from python_llm_factory.config.open_ai_settings import OpenAISettings
 
 
+DEFAULT_APP_NAME = "GenAI Project Template"
+
 class Settings(BaseSettings):
-    app_name: str = "GenAI Project Template"
+    app_name: str = DEFAULT_APP_NAME
     openai: OpenAISettings = OpenAISettings()
     anthropic: AnthropicSettings = AnthropicSettings()
     gemini: GeminiSettings = GeminiSettings()
@@ -19,18 +19,5 @@ class Settings(BaseSettings):
 
 
 @lru_cache
-def get_settings() -> Settings:
-    return Settings()
-
-
-def set_logging_level(level: int = logging.INFO) -> None:
-    logging.getLogger("instructor").setLevel(level=level)
-
-
-def set_debug_mode() -> None:
-    # https://python.useinstructor.com/debugging/#example-local-debug-run
-    os.environ["LLM_LOGGING_LEVEL"] = "1"
-
-
-def stop_debug_mode() -> None:
-    os.environ["LLM_LOGGING_LEVEL"] = "0"
+def get_settings(name: str = DEFAULT_APP_NAME) -> Settings:
+    return Settings(app_name=name)

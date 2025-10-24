@@ -1,4 +1,4 @@
-from examples.structured_output.ticket_system import TicketCategory, process_ticket
+from examples.instructor_examples.structured_output.ticket_system import TicketCategory, process_ticket
 
 
 def billing_issue_example() -> None:

@@ -6,9 +6,8 @@ from python_llm_factory.consts.provider import LlmProvider
 
 class LlamaBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.LLAMA.value
-    api_key: str = "key"  # required, but not used
-    default_model: str = "llama3"
     base_url: str = "http://localhost:11434/v1"
+    api_key: str = "key"  # required, but not used
 
 
 class Llama3Settings(LlamaBaseSettings):

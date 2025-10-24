@@ -12,9 +12,8 @@ class LlmProviderFactory:
     def __init__(self) -> None:
         self.logger = get_logger(self.__class__.__name__)
 
-    def initialize_client(self, settings: LlmProviderSettings) -> Any:
-        self.logger.debug(f"Initializing client with settings: {json_pretty_format(settings.__dict__)}")
-
+    @staticmethod
+    def initialize_client(settings: LlmProviderSettings) -> Any:
         kwargs = {
             "api_key": settings.api_key,
             "base_url": settings.base_url

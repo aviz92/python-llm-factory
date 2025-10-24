@@ -4,7 +4,7 @@ from typing import Annotated
 from instructor import llm_validator
 from pydantic import BaseModel, BeforeValidator, Field
 
-from python_llm_factory.config.settings import Settings
+from python_llm_factory.config.settings_ins import Settings
 from python_llm_factory.instructor_llm.instructor_factory import LlmInstructorFactory
 
 llm = LlmInstructorFactory(

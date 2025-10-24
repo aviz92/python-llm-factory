@@ -8,8 +8,8 @@ from python_llm_factory.consts.provider import LlmProvider
 
 class OpenAIBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.OPENAI.value
+    # base_url: str | None = None
     api_key: str = os.getenv("OPENAI_API_KEY") or ""
-    default_model: str = "gpt-4o"
 
 
 class Gpt4oSettings(OpenAIBaseSettings):

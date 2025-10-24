@@ -8,16 +8,13 @@ from python_llm_factory.consts.provider import LlmProvider
 
 class GeminiBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.GEMINI.value
-    api_key: str = os.getenv("GEMINI_API_KEY") or ""
-    default_model: str = "gemini-1.5-flash"
-    # default_model: str = "gemini-2.5-flash"
-    max_tokens: int = 4096
     base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
+    api_key: str = os.getenv("GEMINI_API_KEY") or None
+    max_tokens: int = 4096
 
 
 class Gemini15FlashSettings(GeminiBaseSettings):
     default_model: str = "gemini-1.5-flash"
-    # default_model: str = "gemini-2.5-flash"
 
 
 class Gemini25FlashSettings(GeminiBaseSettings):
