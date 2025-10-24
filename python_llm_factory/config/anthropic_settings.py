@@ -9,7 +9,7 @@ from python_llm_factory.consts.provider import LlmProvider
 class AnthropicBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.ANTHROPIC.value
     # base_url: str | None = None
-    api_key: str = os.getenv("ANTHROPIC_API_KEY") or None
+    api_key: str = os.getenv("ANTHROPIC_API_KEY", "")
     max_tokens: int = 1024
 
 

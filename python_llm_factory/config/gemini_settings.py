@@ -9,7 +9,7 @@ from python_llm_factory.consts.provider import LlmProvider
 class GeminiBaseSettings(LlmProviderSettings):
     provider: str = LlmProvider.GEMINI.value
     base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
-    api_key: str = os.getenv("GEMINI_API_KEY") or None
+    api_key: str = os.getenv("GEMINI_API_KEY", "")
     max_tokens: int = 4096
 
 

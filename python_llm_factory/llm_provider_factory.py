@@ -5,6 +5,7 @@ from custom_python_logger import get_logger, json_pretty_format
 from openai import OpenAI
 
 from python_llm_factory.config.base_settings import LlmProviderSettings
+from python_llm_factory.config.settings_ins import get_settings
 from python_llm_factory.consts.provider import LlmProvider
 
 
